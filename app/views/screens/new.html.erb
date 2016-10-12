@@ -1,0 +1,20 @@
+<%= form_for(@screen) do |f|%>
+	<div class="field">
+    <%= f.label :total_seats %>
+    <%= f.text_field :total_seats %>
+  </div>
+
+	<div class="field">
+    <%= f.label :total_rows %>
+    <%= f.text_field :total_rows %>
+  </div>
+
+  <div class="field">
+    <%= f.label :total_columns %>
+    <%= f.text_field :total_columns %>
+  </div>
+
+  <div class="actions">
+	 <%= f.submit "save", class: "btn btn-primary" %>
+  </div>
+<% end %>		

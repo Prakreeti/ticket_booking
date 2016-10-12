@@ -1,0 +1,42 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <% if !current_user %>
+            <a href="#"><span class="glyphicon glyphicon-user"></span> Login</a>
+          <% else %>
+            <a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a>
+          <% end %>
+        </li>
+        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <% @movies.each_slice(3) do |movies| %>
+    <div class="row">        
+      <% movies.each do |movie| %>
+        <div class="col-sm-4">
+          <div class="panel panel-primary">
+            <div class="panel-heading"><%= movie.title %></div>
+            <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+            <div class="panel-footer">
+              <%= link_to "Book Tickets Now", fetch_show_time_path(movie.id) %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+    

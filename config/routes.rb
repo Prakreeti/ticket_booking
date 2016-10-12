@@ -1,7 +1,20 @@
 Rails.application.routes.draw do
   devise_for :users 
   resources :users
-  root 'users#index'
+  resources :admins
+  resources :screens do
+    member do
+      get :fetch_layout_for
+    end
+  end
+  resources :seats
+  resources :seat_categories
+  resources :show_times do
+    member do
+      get :fetch
+    end
+  end
+  root 'movies#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

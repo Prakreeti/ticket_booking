@@ -11,7 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161006055006) do
+ActiveRecord::Schema.define(version: 20161007123741) do
+
+  create_table "blocked_seats", force: :cascade do |t|
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "user_id",    limit: 4
+    t.integer  "hall_id",    limit: 4
+    t.integer  "screen_id",  limit: 4
+    t.integer  "seat_id",    limit: 4
+  end
+
+  add_index "blocked_seats", ["hall_id"], name: "index_blocked_seats_on_hall_id", using: :btree
+  add_index "blocked_seats", ["screen_id"], name: "index_blocked_seats_on_screen_id", using: :btree
+  add_index "blocked_seats", ["seat_id"], name: "index_blocked_seats_on_seat_id", using: :btree
+  add_index "blocked_seats", ["user_id"], name: "index_blocked_seats_on_user_id", using: :btree
+
+  create_table "halls", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "movies", force: :cascade do |t|
     t.datetime "created_at",                     null: false
@@ -45,15 +64,22 @@ ActiveRecord::Schema.define(version: 20161006055006) do
   add_index "reserved_seats", ["seat_id"], name: "index_reserved_seats_on_seat_id", using: :btree
 
   create_table "screens", force: :cascade do |t|
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.integer  "total_seats", limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "total_seats",   limit: 4
+    t.integer  "total_rows",    limit: 4
+    t.integer  "total_columns", limit: 4
+    t.integer  "hall_id",       limit: 4
   end
 
+  add_index "screens", ["hall_id"], name: "index_screens_on_hall_id", using: :btree
+
   create_table "seat_categories", force: :cascade do |t|
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.text     "type",       limit: 4294967295
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.text     "seat_type",    limit: 4294967295
+    t.integer  "starting_row", limit: 4
+    t.integer  "ending_row",   limit: 4
   end
 
   create_table "seat_pricings", force: :cascade do |t|
@@ -68,6 +94,20 @@ ActiveRecord::Schema.define(version: 20161006055006) do
   add_index "seat_pricings", ["seat_category_id"], name: "index_seat_pricings_on_seat_category_id", using: :btree
   add_index "seat_pricings", ["seat_id"], name: "index_seat_pricings_on_seat_id", using: :btree
   add_index "seat_pricings", ["show_time_id"], name: "index_seat_pricings_on_show_time_id", using: :btree
+
+  create_table "seat_selects", force: :cascade do |t|
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "user_id",    limit: 4
+    t.integer  "hall_id",    limit: 4
+    t.integer  "screen_id",  limit: 4
+    t.integer  "seat_id",    limit: 4
+  end
+
+  add_index "seat_selects", ["hall_id"], name: "index_seat_selects_on_hall_id", using: :btree
+  add_index "seat_selects", ["screen_id"], name: "index_seat_selects_on_screen_id", using: :btree
+  add_index "seat_selects", ["seat_id"], name: "index_seat_selects_on_seat_id", using: :btree
+  add_index "seat_selects", ["user_id"], name: "index_seat_selects_on_user_id", using: :btree
 
   create_table "seats", force: :cascade do |t|
     t.datetime "created_at",                     null: false
@@ -113,13 +153,22 @@ ActiveRecord::Schema.define(version: 20161006055006) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "blocked_seats", "halls"
+  add_foreign_key "blocked_seats", "screens"
+  add_foreign_key "blocked_seats", "seats"
+  add_foreign_key "blocked_seats", "users"
   add_foreign_key "reservations", "show_times"
   add_foreign_key "reservations", "users"
   add_foreign_key "reserved_seats", "reservations"
   add_foreign_key "reserved_seats", "seats"
+  add_foreign_key "screens", "halls"
   add_foreign_key "seat_pricings", "seat_categories"
   add_foreign_key "seat_pricings", "seats"
   add_foreign_key "seat_pricings", "show_times"
+  add_foreign_key "seat_selects", "halls"
+  add_foreign_key "seat_selects", "screens"
+  add_foreign_key "seat_selects", "seats"
+  add_foreign_key "seat_selects", "users"
   add_foreign_key "seats", "screens"
   add_foreign_key "seats", "seat_categories"
   add_foreign_key "show_times", "movies"

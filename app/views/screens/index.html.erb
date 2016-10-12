@@ -1,0 +1,11 @@
+<% if @screens %>
+	<% @screens.each do |screen| %>
+		<div class="actions">
+			<%= link_to "Screen-#{screen.id}", screen_path(screen.id), class: "btn btn-primary" %>
+		</div>
+	<% end %> 
+<% else %>
+	<div>
+		There are no screens yet! Add the first screen.
+	</div>
+<% end %>

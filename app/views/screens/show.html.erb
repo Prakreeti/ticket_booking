@@ -1,0 +1,29 @@
+<h2>Screen <%= "#{@screen.id}" %></h2>
+<div id="screen_position">All Eyes Here</div>
+<div id="screen_table_<%= "#{@screen.id}" %>">
+	<table class="seats-table">
+		<% (1..@screen.total_rows).each do |row| %>
+		  <tr>
+		 		<% (1..@screen.total_columns).each do |column| %>
+		 			<td id="screen_<%= "#{@screen.id}" %>_grid_<%= row %>_<%= column %>">
+		 				<h4><%= row %></h4>
+		 				<% @seat_categories.each do |seat_category| %>
+		 					<% starting = seat_category.starting_row %>
+		 					<% ending = seat_category.ending_row %>
+		 					<% if row.between?(starting,ending) %>
+		 						<% @seat_category_id = seat_category.id %>
+		 					<% end %>
+		 				<% end %>
+		 				<%= form_for(:seat, :url => url_for(:controller => "seats", :action => "create", :method => "post")) do |f|%>
+		 					<%= f.hidden_field(:row, value: row) %>
+		 					<%= f.hidden_field(:column, value: column) %>
+		 					<%= f.hidden_field(:screen_id, value: @screen.id) %>
+		 					<%= f.hidden_field(:seat_category_id, value: @seat_category_id) %>
+		 					<%= f.submit "save" %>
+						<% end %>		 				
+		 			</td>
+		 		<% end %>
+		  </tr>
+		<% end %>
+	</table>
+</div>

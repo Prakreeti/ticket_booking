@@ -1,0 +1,23 @@
+<table class="table table-hover">
+	<thead>
+		<th>Movies Now</th>
+		<th>Hall</th>
+		<th>Screen</th>
+		<th>Time</th>
+	</thead>
+	<% if !@showtimes_collection.empty? %>
+		<tbody>
+			<% @showtimes_collection.each do |showtime| %>
+				<tr>
+					<td><%= showtime[:movie_name] %></td>
+					<td>Hall-<%= showtime[:hall] %></td>
+					<td>Screen-<%= showtime[:screen] %></td>
+					<td><%= showtime[:time] %></td>
+					<td><%= link_to "<i class=\"glyphicon glyphicon-hand-left\"></i> Book for the show".html_safe, fetch_layout_for_screen_path(showtime[:screen]) %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	<% else %>
+		No shows are available.
+	<% end %>
+</table>

@@ -1,0 +1,5 @@
+<% @seat_categories.each do |seat_category| %>
+	<div>
+		<span><%= seat_category.seat_type %>--<%= seat_category.starting_row %> to  <%= seat_category.ending_row %></span>
+	</div>
+<% end %>

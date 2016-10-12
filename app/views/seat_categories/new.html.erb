@@ -1,0 +1,21 @@
+<%= form_for(@seat_category) do |f|%>
+	<div class="field">
+    <%= f.label :seat_type %>
+    <%= f.text_field :seat_type %>
+  </div>
+
+	<div class="field">
+    <%= f.label :starting_row %>
+    <%= f.text_field :starting_row %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ending_row %>
+    <%= f.text_field :ending_row %>
+  </div>
+
+  <div class="actions">
+	 <%= f.submit "save", class: "btn btn-primary" %>
+  </div>
+<% end %>	
+<%= link_to "Display current seats structure", seat_categories_path %>

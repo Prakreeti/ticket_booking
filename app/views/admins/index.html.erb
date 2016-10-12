@@ -1,0 +1,13 @@
+<h2>Welcome <%= current_user.email %></h2>
+<div class="actions">
+	<%= link_to "Add Screen", new_screen_path, class: "btn btn-primary" %>
+</div>
+<div class="actions">
+	<%= link_to "Manage Seat Categories", new_seat_category_path, class: "btn btn-primary" %>
+</div>
+<div class="actions">
+  <%= link_to "Manage seat layout for screens", screens_path, class: "btn btn-primary" %>
+</div>
+<div class="actions">
+	<%= link_to "Manage Movies","#", class: "btn btn-primary" %>
+</div>
