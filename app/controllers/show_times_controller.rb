@@ -17,5 +17,5 @@ class ShowTimesController < ApplicationController
       @showtimes_collection << each_showtime
     end
 	end
-
+	
 end

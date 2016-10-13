@@ -21,23 +21,13 @@ class ScreensController < ApplicationController
 
 	def fetch_layout_for
 		@screen = Screen.find_by(id: params[:id])
-		@seats = @screen.seats
-		@seat_categories = SeatCategory.all
-		seats_for_the_screen
+		gon.rows = @screen.total_rows
+		gon.columns = @screen.total_columns
 	end
 	
 	private
 
 	def screen_params
     params.require(:screen).permit(:total_seats, :total_rows, :total_columns)
-  end
-
-  def seats_for_the_screen
-  	@seat_collection = []
-  	(1..@screen.total_rows).each do |row|
-  		(1..@screen.total_columns).each do |column|
-  			@seat_collection << {row: row, column: column} if Seat.where(row: row, column: column).exists?
-  		end
-  	end
   end
 end

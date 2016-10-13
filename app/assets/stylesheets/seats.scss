@@ -25,14 +25,11 @@
 }
 
 #holder{        
-  height: 200px;
   border-left: solid 20px black;
   background-color:#F5F5F5;
   border-top: 1px solid #A4A4A4;
   border-right: 1px solid #A4A4A4;
-  border-bottom: 1px solid #A4A4A4;
-  margin: auto;
-  width: auto;
+  border-bottom: 1px solid #A4A4A4; 
 }
 
 #place {
@@ -46,8 +43,7 @@
 
 #place li
 {
-   list-style: none outside none;
-   position: absolute;   
+  position: absolute;   
 } 
 
 #place li:hover
@@ -77,6 +73,7 @@
 }
 
 #seatDescription li{
+  position: relative;
   verticle-align: middle;    
   list-style: none outside none;
   padding-left: 3%;

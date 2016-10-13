@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>TicketBooking.com</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<div class="jumbotron cover">
-  <div class="container text-center">
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-    <h1 class="heading">No Queue</h1>
-    <p class="tagline">Hassle free movie ticket booking anytime and anywhere</p>
-  </div>
-</div>
-<%= yield %>
-</body>
+  <head>
+    <title>TicketBooking.com</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <%= include_gon %>
+    <div class="jumbotron cover">
+      <div class="container text-center">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+        <h1 class="heading">No Queue</h1>
+        <p class="tagline">Hassle free movie ticket booking anytime and anywhere</p>
+      </div>
+    </div>
+    <%= yield %>
+  </body>
 </html>

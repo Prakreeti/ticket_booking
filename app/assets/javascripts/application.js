@@ -15,11 +15,11 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
-
 $(document).ready(function() {
-var settings = {
-               rows: 5,
-               cols: 25,
+
+  var settings = {
+               rows: gon.rows,
+               cols: gon.columns,
                rowCssPrefix: 'row-',
                colCssPrefix: 'col-',
                seatWidth: 35,
@@ -28,9 +28,12 @@ var settings = {
                selectedSeatCss: 'selectedSeat',
                selectingSeatCss: 'selectingSeat'
            };
-      
 
-var init = function (reservedSeat) {
+  var holder_height = settings.rows * 40;
+
+  $("#holder").css("height", holder_height);
+
+  var init = function (reservedSeat) {
             
             var str = [], seatNo, className;
             for (i = 0; i < settings.rows; i++) {
@@ -49,27 +52,22 @@ var init = function (reservedSeat) {
             $('#place').html(str.join(''));
 
           };
-            //case I: Show from starting
-            //init();
- 
-            //Case II: If already booked
+    
 var bookedSeats = [5, 10, 25, 2, 3, 4];
 init(bookedSeats);
 
-
-
 $('.' + settings.seatCss).click(function () {
-if ($(this).hasClass(settings.selectedSeatCss)){
+  if ($(this).hasClass(settings.selectedSeatCss)){
     alert('This seat is already reserved');
-}
-else{
+  }
+  else{
     $(this).toggleClass(settings.selectingSeatCss);
-    }
-});
+  }
+})
  
 $('#btnShow').click(function () {
     var str = [];
-    $.each($('#place li.' + settings.selectedSeatCss + ' a, #place li.'+ settings.selectingSeatCss + ' a'), function (index, value) {
+    $.each($('#place li.' + settings.selectedSeatCss + ' a, #place li.'+ settings.selectingSeatCss + ' a'), function () {
         str.push($(this).attr('title'));
     });
     alert(str.join(','));
@@ -77,7 +75,7 @@ $('#btnShow').click(function () {
  
 $('#btnShowNew').click(function () {
     var str = [], item;
-    $.each($('#place li.' + settings.selectingSeatCss + ' a'), function (index, value) {
+    $.each($('#place li.' + settings.selectingSeatCss + ' a'), function () {
         item = $(this).attr('title');                   
         str.push(item);                   
     });

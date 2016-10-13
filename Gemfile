@@ -26,6 +26,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'autoprefixer-rails', '~> 6.3.7'
 #for authentication
 gem 'devise'
+gem 'gon'
 
 
 # Use ActiveModel has_secure_password
