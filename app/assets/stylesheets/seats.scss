@@ -30,6 +30,7 @@
   border-top: 1px solid #A4A4A4;
   border-right: 1px solid #A4A4A4;
   border-bottom: 1px solid #A4A4A4; 
+  margin: auto;
 }
 
 #place {
@@ -68,18 +69,18 @@
   background-image: url("selected_seat_img.jpg");        
 }
 
-#place .row-3, #place .row-4{
-  margin-top:10px;
-}
-
-#seatDescription li{
-  position: relative;
-  verticle-align: middle;    
-  list-style: none outside none;
-  padding-left: 3%;
-  margin-top: 30px;
-  height: 35px;
-  float: left;
+#seat_description{
+  margin: auto;
+  width: 40%;
+  li{
+    position: relative;
+    verticle-align: middle;    
+    list-style: none outside none;
+    padding-left: 7%;
+    margin-top: 30px;
+    height: 35px;
+    float: left;
+  }
 }
 
 #seat_available_image{
@@ -92,4 +93,8 @@
 
 #seat_selected_image{
   background: url('selected_seat_img.jpg') no-repeat scroll 0 0 transparent;
+}
+
+#button_display{
+  clear: both;
 }

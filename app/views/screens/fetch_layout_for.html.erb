@@ -4,15 +4,18 @@
   <ul id="place">
   </ul>
 </div>
-<div id="seatDescription">
+<div id="seat_description">
   <ul>
     <li id="seat_available_image">Available Seat</li>
     <li id="seat_booked_image">Booked Seat</li>
     <li id="seat_selected_image">Selected Seat</li>
   </ul>
 </div>
-<div style="clear: both; width: 100%">
-  <input type="button" id="btnShowNew" value="Show Selected Seats" />
-  <input type="button" id="btnShow" value="Show All" />           
+<div id="button_display">
+  <%= link_to "Show Selected Seats", "#", id: "btnShowNew", class: "btn btn-primary" %> 
+  <%= link_to "Show All", "#", id: "btnShow", class: "btn btn-primary" %> 
+  <%= link_to "Confirm seats", "javascript:void(0);", id: "confirm_seats", class: "btn btn-primary" %> 
+</div>
+<div id="selection_list">
 </div>
 

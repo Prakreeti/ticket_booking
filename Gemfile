@@ -28,6 +28,9 @@ gem 'autoprefixer-rails', '~> 6.3.7'
 gem 'devise'
 gem 'gon'
 
+gem 'pry'
+gem 'pry-nav'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

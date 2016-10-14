@@ -20,9 +20,11 @@ class ScreensController < ApplicationController
 	end
 
 	def fetch_layout_for
-		@screen = Screen.find_by(id: params[:id])
+		@showtime = ShowTime.find_by(id: params[:id])
+		@screen = Screen.find_by(id: @showtime.screen_id)
 		gon.rows = @screen.total_rows
 		gon.columns = @screen.total_columns
+		gon.showtime = @showtime
 	end
 	
 	private

@@ -13,7 +13,8 @@ class ShowTimesController < ApplicationController
       each_showtime = { movie_name: showtime.get_movie_name,
       							    time: showtime.get_time,
       							    hall: showtime.get_hall,
-          							screen: showtime.get_screen}
+          							screen: showtime.get_screen,
+          							showtime: showtime}
       @showtimes_collection << each_showtime
     end
 	end

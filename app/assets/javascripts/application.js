@@ -20,6 +20,7 @@ $(document).ready(function() {
   var settings = {
                rows: gon.rows,
                cols: gon.columns,
+               screen: gon.screen,
                rowCssPrefix: 'row-',
                colCssPrefix: 'col-',
                seatWidth: 35,
@@ -30,8 +31,10 @@ $(document).ready(function() {
            };
 
   var holder_height = settings.rows * 40;
+  var holder_width = settings.cols * 40
 
   $("#holder").css("height", holder_height);
+  $("#holder").css("width", holder_width);
 
   var init = function (reservedSeat) {
             
@@ -53,32 +56,51 @@ $(document).ready(function() {
 
           };
     
-var bookedSeats = [5, 10, 25, 2, 3, 4];
-init(bookedSeats);
+  var bookedSeats = [5, 10, 25, 2, 3, 4];
+  init(bookedSeats);
 
-$('.' + settings.seatCss).click(function () {
-  if ($(this).hasClass(settings.selectedSeatCss)){
-    alert('This seat is already reserved');
-  }
-  else{
-    $(this).toggleClass(settings.selectingSeatCss);
-  }
-})
- 
-$('#btnShow').click(function () {
-    var str = [];
-    $.each($('#place li.' + settings.selectedSeatCss + ' a, #place li.'+ settings.selectingSeatCss + ' a'), function () {
-        str.push($(this).attr('title'));
-    });
-    alert(str.join(','));
-})
- 
-$('#btnShowNew').click(function () {
+  $('.' + settings.seatCss).click(function () {
+    if ($(this).hasClass(settings.selectedSeatCss)){
+      alert('This seat is already reserved');
+    }
+    else{
+      $(this).toggleClass(settings.selectingSeatCss);
+    }
+  })
+   
+  $('#btnShow').click(function () {
+      var str = [];
+      $.each($('#place li.' + settings.selectedSeatCss + ' a, #place li.'+ settings.selectingSeatCss + ' a'), function () {
+          str.push($(this).attr('title'));
+      });
+      alert(str.join(','));
+  })
+
+  var seats_selected = []
+  $('#btnShowNew').click(function () {
     var str = [], item;
     $.each($('#place li.' + settings.selectingSeatCss + ' a'), function () {
-        item = $(this).attr('title');                   
-        str.push(item);                   
+      item = $(this).attr('title');                   
+      str.push(item);                   
     });
     alert(str.join(','));
-	})
+    seats_selected = str;
+  })
+
+  $('#confirm_seats').click(function() {  
+    var str = [], item;
+    $.each($('#place li.' + settings.selectingSeatCss + ' a'), function () {
+      item = $(this).attr('title');                   
+      str.push(item);                   
+    });
+    console.log(str.join(","));
+    $.ajax({
+      type: "GET",
+      url: "/seat_selects",
+      data: {seats: str,
+             total_rows: settings.rows,
+             total_columns: settings.cols, 
+             show_time: gon.showtime},
+    })
+  })
 });

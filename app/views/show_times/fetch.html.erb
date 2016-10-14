@@ -13,7 +13,7 @@
 					<td>Hall-<%= showtime[:hall] %></td>
 					<td>Screen-<%= showtime[:screen] %></td>
 					<td><%= showtime[:time] %></td>
-					<td><%= link_to "<i class=\"glyphicon glyphicon-hand-left\"></i> Book for the show".html_safe, fetch_layout_for_screen_path(showtime[:screen]) %></td>
+					<td><%= link_to "<i class=\"glyphicon glyphicon-hand-left\"></i> Book for the show".html_safe, fetch_layout_for_screen_path(showtime[:showtime]) %></td>
 				</tr>
 			<% end %>
 		</tbody>
