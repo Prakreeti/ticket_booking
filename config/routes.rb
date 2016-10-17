@@ -9,12 +9,13 @@ Rails.application.routes.draw do
   end
   resources :seats
   resources :seat_categories
+  resources :blocked_seats
   resources :show_times do
     member do
       get :fetch
     end
   end
-  resources :seat_selects
+  resources :seat_selects, only:[:index]
   root 'movies#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

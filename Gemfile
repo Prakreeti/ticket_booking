@@ -31,6 +31,7 @@ gem 'gon'
 gem 'pry'
 gem 'pry-nav'
 
+gem 'sidekiq'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

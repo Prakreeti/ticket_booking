@@ -16,10 +16,10 @@
 		<tr>
 			<td></td>
 			<td>Total:</td>
-			<td><h4><%= total_price %></h4></td>
+			<td><h4>Rs.<%= total_price %>/-</h4></td>
 			<td></td>
-
 		</tr>
 	</tbody>
 </table>
+<%= link_to "Proceed to Pay", blocked_seats_path(seats: seats), method: :post, class: "btn btn-primary" %>
  

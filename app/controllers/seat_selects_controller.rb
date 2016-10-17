@@ -1,5 +1,5 @@
 class SeatSelectsController < ApplicationController
-	before_action :sanitize_seat_params, only:[:index]
+	before_action :fetch_params, only:[:index]
 
 	def index
 		@seats_selected = params[:seats]
@@ -15,9 +15,10 @@ class SeatSelectsController < ApplicationController
 
 	private
 
-  def sanitize_seat_params
+  def fetch_params
     params[:total_rows] = params[:total_rows].to_i
     params[:total_columns] = params[:total_columns].to_i
+    params[:show_time] = params[:show_time]  
   end
 
   def assign_seat_categories
@@ -31,12 +32,11 @@ class SeatSelectsController < ApplicationController
 			@seat_categories.each do |category|
 				if column.between?(category.starting_row, category.ending_row)
 					price = SeatPricing.find_by(seat_category: category, show_time_id: @show_time_id)
-					each_seat = {seat: seat, category: category.seat_type, price: price.price }
+					each_seat = {seat: seat, category: category.seat_type, price: price.price, show_time: @show_time}
 					@total_price = @total_price + each_seat[:price]
 					@seat_details << each_seat
 					break
 				end
-				
 			end
 		end
   end
